@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Swapify.API.BackgroundWorkers;
 using Swapify.API.PipelineBehiaviour;
 using System.Text;
 
@@ -13,6 +14,7 @@ builder.Services.AddMediatR(configuration =>
     configuration.Lifetime = ServiceLifetime.Singleton;
     configuration.RegisterServicesFromAssembly(typeof(Program).Assembly);
 });
+builder.Services.AddHostedService<LablerWorker>();
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlerPipeline<,>));
 builder.Services.AddAuthentication()
     .AddJwtBearer((JwtBearerOptions options) =>
