@@ -18,8 +18,9 @@ namespace Swapify.API.Handlers
             using (NpgsqlConnection connection = new NpgsqlConnection(_config.GetConnectionString("DB")))
             {
                 connection.Open();
-                var res = await connection.QueryFirstAsync<long>("");
+                //var res = await connection.QueryFirstAsync<long>("");
             }
+            return null;
         }
     }
 }
