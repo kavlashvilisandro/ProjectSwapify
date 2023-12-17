@@ -25,8 +25,9 @@ namespace Swapify.API.BackgroundWorkers
                 {
                     connection.Open();
                     var toLabel = await connection.QueryAsync<PostEntity>(@"select id, i_have as HaveItem, i_want as WantItem from user_posts where status = false");
-                    foreach(var post in toLabel) {
-                        var wantRes = await _mediator.Send(new MatchLabelRequest() {Name = post.WantItem, PostId = post.Id});
+                    foreach (var post in toLabel)
+                    {
+                        var wantRes = await _mediator.Send(new MatchLabelRequest() { Name = post.WantItem, PostId = post.Id });
                         var haveRes = await _mediator.Send(new MatchLabelRequest() { Name = post.HaveItem, PostId = post.Id });
                         var dp = new DynamicParameters();
                         dp.Add("postId", post.Id);
@@ -39,7 +40,7 @@ namespace Swapify.API.BackgroundWorkers
                 }
 
 
-                await Task.Delay(10000);
+                await Task.Delay(1000);
             }
         }
     }

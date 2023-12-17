@@ -20,7 +20,7 @@ namespace Swapify.API.Handlers
             using (NpgsqlConnection connection = new NpgsqlConnection(_config.GetConnectionString("DB")))
             {
                 connection.Open();
-                var qeuryOne = await connection.QueryFirstAsync<LabelEntity>(@"select * from labels where label like '%' || @label ||'%'", new {request.Name});
+                var qeuryOne = await connection.QueryFirstAsync<LabelEntity>(@"select * from labels where label like '%' || @label ||'%'", new {label = request.Name});
                 if (qeuryOne !=  null)
                 {
                     return new MatchLabelResponse(){MatchedLabelId = qeuryOne.Id};
