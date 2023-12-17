@@ -16,7 +16,7 @@ namespace Swapify.API.Controllers
         [HttpPost]
         public async Task AddNewPost([FromBody] NewTradeRequest newTradeRequest)
         {
-
+            await _mediator.Send(newTradeRequest);
         }
 
     }
